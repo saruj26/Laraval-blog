@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\PostController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/test', function () {
@@ -8,8 +9,10 @@ Route::get('/test', function () {
 });
 
 
-Route::get('/', function () {
-    return "<h1> Hello world</h1>";
-});
+Route::get('/', [PostController::class, 'index']);
 
-Route::get()
+Route::get('/post/{id}', [PostController::class, 'detail'])->where('id', '[0-9]+')->name('post.detail');
+
+Route::get('/old-url', [PostController::class, 'oldUrl']);
+
+Route::get('/new-something-url', [PostController::class, 'newUrl'])->name('new_url');
