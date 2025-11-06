@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
+use App\Models\Post;
 
 class PostSeeder extends Seeder
 {
@@ -83,12 +84,10 @@ class PostSeeder extends Seeder
             ]; 
 
             foreach ($titles as $index => $title) {
-                DB::table('posts')->insert([
+                Post::create([
                     'title' => $title,
                     'content' => $contents[$index],
                     'img_url' => $img_urls[$index],
-                    'created_at' => now(),
-                    'updated_at' => now(),
                 ]);
             }
 
