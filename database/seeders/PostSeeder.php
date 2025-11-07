@@ -6,6 +6,7 @@ use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use App\Models\Post;
+use App\Models\Category;
 
 class PostSeeder extends Seeder
 {
@@ -14,7 +15,9 @@ class PostSeeder extends Seeder
      */
     public function run(): void
     {
-        $titles = [ 
+            // Arrays containing titles, contents, and image URLs 
+
+            $titles = [ 
                 "The Future of AI", 
                 "Climate Change Solutions", 
                 "Remote Work Trends", 
@@ -83,13 +86,16 @@ class PostSeeder extends Seeder
                 "https://picsum.photos/id/20/800/400", 
             ]; 
 
+            $categories = Category::all();
             foreach ($titles as $index => $title) {
+                $category = $categories->random();
                 Post::create([
                     'title' => $title,
                     'content' => $contents[$index],
                     'img_url' => $img_urls[$index],
+                    'category_id' => $category->id,
                 ]);
             }
-
     }
+
 }
