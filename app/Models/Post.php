@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
+use App\Models\Category;
 
 class Post extends Model
 {
@@ -23,4 +24,10 @@ class Post extends Model
             $post->slug = $slug;
         });
     }
+
+    public function category() {
+        return $this->belongsTo(Category::class);
+    }
 }
+
+

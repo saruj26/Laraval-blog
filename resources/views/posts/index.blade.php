@@ -33,7 +33,7 @@
                                             @else
                                                 <span class="text-muted">Read More</span>
                                             @endif
-                                            <a class="text-decoration-none text-dark fw-bold" href="#">Sports</a>
+                                            <a class="text-decoration-none text-dark fw-bold" href="#">{{ $post->category->name ?? 'Uncategorized' }}</a>
                                         </div>
                                     </div>
                                 </div>

@@ -32,7 +32,12 @@ class PostController extends Controller
         try {
             // Use findOrFail so Eloquent throws ModelNotFoundException when the post is missing
             $post = Post::where('slug', $slug)->firstOrFail();
-            return view('posts.detail', compact('post'));
+            $category = $post->category;
+            $relatedPosts = Post::where('category_id', $category->id)
+                                ->where('id', '!=', $post->id)
+                                ->take(5)
+                                ->get();
+            return view('posts.detail', compact('post', 'relatedPosts'));
         } catch (\Illuminate\Database\Eloquent\ModelNotFoundException $ex) {
             // Return a 404 view when the model isn't found
             return response()->view('errors.404', [], 404);
