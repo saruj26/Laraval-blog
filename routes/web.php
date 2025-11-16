@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PostController;
 use Illuminate\Support\Facades\Route;
 
@@ -9,9 +10,12 @@ Route::get('/test', function () {
 });
 
 
-Route::get('/', [PostController::class, 'index']);
+Route::get('/', [PostController::class, 'index'])->name('posts.index');
 
 Route::get('/post/{slug}', [PostController::class, 'detail'])->name('post.detail');
+
+Route::get('/contact',[HomeController::class, 'contactForm'])->name('contact.form');
+Route::post('/contact',[HomeController::class, 'submitContactForm'])->name('contact.submit');
 
 Route::get('/old-url', [PostController::class, 'oldUrl']);
 

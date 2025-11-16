@@ -8,11 +8,21 @@ use App\Models\Post;
 class PostController extends Controller
 {
     //
-    public function index()
+    public function index(Request $request)
     {
         $title = "Sarujanan";
         // $posts = $this->getPosts();
-        $posts = Post::all();
+        // $posts = Post::all();
+        $query = Post::query();
+
+        if ($request->has('search') && !empty($request->search)){
+            $query->where('title', 'like', '%'.$request->search.'%')->orWhere('content','like','%'.$request->search.'%');
+
+        }
+
+        $posts = $query->paginate(5);
+
+        // $posts = Post::paginate(5);
 
         return view('posts.index', compact('title', 'posts'));
     }
